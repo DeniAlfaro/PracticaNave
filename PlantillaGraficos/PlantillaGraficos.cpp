@@ -18,7 +18,7 @@ GLFWwindow* window;
 
 float posXTriangulo = 0.0f, posYTriangulo = 0.0f;
 double tiempoActual, tiempoAnterior;
-double velocidadTriangulo = 0.2;
+double velocidadTriangulo = 0.5;
 float angulo = 0.0f;
 
 void teclado_callback(GLFWwindow* window, int key, int scancode, int action, int mods) {
@@ -36,6 +36,8 @@ void teclado_callback(GLFWwindow* window, int key, int scancode, int action, int
 	}
 }
 
+float compX;
+float compY; 
 void actualizar() {
 	//posXTriangulo += 0.00001;
 
@@ -62,7 +64,11 @@ void actualizar() {
 	}
 	int estadoArriba = glfwGetKey(window, GLFW_KEY_UP);
 	if (estadoArriba == GLFW_PRESS) {
-		posYTriangulo += velocidadTriangulo * tiempoDiferencial;
+		compX = (cos((angulo + 90) * 3.14159 / 189.0)) * (velocidadTriangulo * tiempoDiferencial);
+		compY = (sin((angulo + 90) * 3.14159 / 189.0)) * (velocidadTriangulo * tiempoDiferencial);
+
+		posXTriangulo += compX;
+		posYTriangulo += compY;
 	}
 	int estadoAbajo = glfwGetKey(window, GLFW_KEY_DOWN);
 	if (estadoAbajo == GLFW_PRESS) {
