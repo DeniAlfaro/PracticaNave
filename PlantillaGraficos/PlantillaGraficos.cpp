@@ -43,37 +43,28 @@ void actualizar() {
 
 	tiempoActual = glfwGetTime();
 	double tiempoDiferencial = tiempoActual - tiempoAnterior;
+	float velocidadAngular = 40.0f;
 
 	int estadoDerecha = glfwGetKey(window, GLFW_KEY_RIGHT);
 	if (estadoDerecha == GLFW_PRESS) {
-		posXTriangulo += velocidadTriangulo * tiempoDiferencial;
-		angulo -= 0.01f;
-		if (angulo >= 360.0f)
-		{
-			angulo = 0.0f;
-		}
+		angulo -= velocidadAngular * tiempoDiferencial;
 	}
 	int estadoIzquierda = glfwGetKey(window, GLFW_KEY_LEFT);
 	if (estadoIzquierda == GLFW_PRESS) {
-		posXTriangulo -= velocidadTriangulo * tiempoDiferencial;
-		angulo += 0.01f;
-		if (angulo >= 360.0f)
-		{
-			angulo = 0.0f;
-		}
+		angulo += velocidadAngular * tiempoDiferencial;
 	}
 	int estadoArriba = glfwGetKey(window, GLFW_KEY_UP);
 	if (estadoArriba == GLFW_PRESS) {
-		compX = (cos((angulo + 90) * 3.14159 / 189.0)) * (velocidadTriangulo * tiempoDiferencial);
-		compY = (sin((angulo + 90) * 3.14159 / 189.0)) * (velocidadTriangulo * tiempoDiferencial);
+		compX = (cos((angulo + 90.0) * 3.14159 / 180.0)) * (velocidadTriangulo * tiempoDiferencial);
+		compY = (sin((angulo + 90.0) * 3.14159 / 180.0)) * (velocidadTriangulo * tiempoDiferencial);
 
 		posXTriangulo += compX;
 		posYTriangulo += compY;
 	}
-	int estadoAbajo = glfwGetKey(window, GLFW_KEY_DOWN);
+	/*int estadoAbajo = glfwGetKey(window, GLFW_KEY_DOWN);
 	if (estadoAbajo == GLFW_PRESS) {
 		posYTriangulo -= velocidadTriangulo * tiempoDiferencial;
-	}
+	}*/
 	tiempoAnterior = tiempoActual;
 }
 
@@ -82,6 +73,7 @@ void dibujar() {
 
 	glTranslatef(posXTriangulo, posYTriangulo, 0.0f);
 	glRotatef(angulo, 0.0f, 0.0f, 1.0f);
+	glScalef(0.4f, 0.7f, 0.7f);
 
 	glBegin(GL_TRIANGLES);
 	glColor3f(0.2, 0.6, 0.1);
