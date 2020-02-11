@@ -60,6 +60,21 @@ void actualizar() {
 
 		posXTriangulo += compX;
 		posYTriangulo += compY;
+
+		//Que salga de la pantalla y vuelva aparecer
+		if (posXTriangulo <= -1.08) {
+			posXTriangulo = 1.00;
+		}
+		else if (posXTriangulo >= 1.08) {
+			posXTriangulo = -1.00;
+		}
+
+		if (posYTriangulo <= -1.08) {
+			posYTriangulo = 1.00;
+		}
+		else if (posYTriangulo >= 1.08) {
+			posYTriangulo = -1.00;
+		}
 	}
 	/*int estadoAbajo = glfwGetKey(window, GLFW_KEY_DOWN);
 	if (estadoAbajo == GLFW_PRESS) {
